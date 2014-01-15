@@ -33,6 +33,8 @@ func main() {
 			return
 		}
 
+		glfw.SetWindowTitle("LifePack")
+
 
 
 	// Initialize.
