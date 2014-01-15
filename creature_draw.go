@@ -2,6 +2,7 @@ package main
 
 
 
+import "fmt"
 import "github.com/banthar/gl"
 import "math"
 
@@ -44,6 +45,18 @@ func (me *Creature) GlDraw() {
 
 
 	// Draw the creature's name.
-		drawString(me.x,me.y, me.name)
+		xx := me.x - me.r - 10
+		yy := me.y - me.r - 10
+
+		drawString(xx,yy, me.name)
+
+
+	// Draw the creature's energy.
+		xx = me.x + me.r
+		yy = me.y - me.r - 10
+
+		s := fmt.Sprintf("energy: %v", me.e)
+
+		drawString(xx,yy, s)
 }
 
