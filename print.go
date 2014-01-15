@@ -36,6 +36,8 @@ func drawRune(x,y, length float64, r rune) {
 			mapp = &fontColon
 		case ';':
 			mapp = &fontSemicolon
+		case '-':
+			mapp = &fontHyphen
 
 
 		case 'A', 'a':
