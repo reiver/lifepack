@@ -91,12 +91,43 @@ func initialize(WIDTH, HEIGHT int) {
 
 func run (WIDTH, HEIGHT int) {
 
+	// Initialize world.
+		f64width  := float64(WIDTH)
+		f64height := float64(HEIGHT)
+
+
+		creatures := []*Creature{
+			NewCreature( fmt.Sprintf("c%d", 1) ).RandomlyPlace(f64width, f64height),
+			NewCreature( fmt.Sprintf("c%d", 2) ).RandomlyPlace(f64width, f64height),
+			NewCreature( fmt.Sprintf("c%d", 3) ).RandomlyPlace(f64width, f64height),
+			NewCreature( fmt.Sprintf("c%d", 4) ).RandomlyPlace(f64width, f64height),
+			NewCreature( fmt.Sprintf("c%d", 5) ).RandomlyPlace(f64width, f64height),
+		}
+
+
+
+
 	// Make the world come alive.
 
 		for i:=0 ; true ; i++ {
 
+			// Logic.
+				for _,creature := range creatures {
+					creature.Next(f64width, f64height)
+				}
+
+
+
+
 			// Draw.
 				 gl.Clear(gl.COLOR_BUFFER_BIT)
+
+
+
+
+				for _,creature := range creatures {
+					creature.GlDraw()
+				}
 
 
 
