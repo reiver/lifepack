@@ -41,5 +41,9 @@ func (me *Creature) GlDraw() {
 			gl.Vertex2d(me.x + dx, me.y + dy)
 
 		gl.End()
+
+
+	// Draw the creature's name.
+		drawString(me.x,me.y, me.name)
 }
 
