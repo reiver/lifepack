@@ -12,6 +12,7 @@ func (me *Creature) GlDraw() {
 
 
 	// Draw circle.
+//@TODO: Should speed this up by pre-computing all these cos() and sin() calculations and storing in a lookup table.
 		gl.Begin(gl.TRIANGLE_FAN)
 			gl.Color3d(me.red, me.green, me.blue)
 
