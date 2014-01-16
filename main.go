@@ -99,11 +99,17 @@ func run (WIDTH, HEIGHT int) {
 
 
 		creatures := []*Creature{
-			NewCreature( fmt.Sprintf("c%d", 1) ).RandomlyPlace(f64width, f64height),
-			NewCreature( fmt.Sprintf("c%d", 2) ).RandomlyPlace(f64width, f64height),
-			NewCreature( fmt.Sprintf("c%d", 3) ).RandomlyPlace(f64width, f64height),
-			NewCreature( fmt.Sprintf("c%d", 4) ).RandomlyPlace(f64width, f64height),
-			NewCreature( fmt.Sprintf("c%d", 5) ).RandomlyPlace(f64width, f64height),
+			NewCreature( fmt.Sprintf("c%d", 1) ).Randomize().RandomlyPlace(f64width, f64height),
+			NewCreature( fmt.Sprintf("c%d", 2) ).Randomize().RandomlyPlace(f64width, f64height),
+			NewCreature( fmt.Sprintf("c%d", 3) ).Randomize().RandomlyPlace(f64width, f64height),
+			NewCreature( fmt.Sprintf("c%d", 4) ).Randomize().RandomlyPlace(f64width, f64height),
+			NewCreature( fmt.Sprintf("c%d", 5) ).Randomize().RandomlyPlace(f64width, f64height),
+
+			NewCreature( fmt.Sprintf("c%d", 6) ).Randomize().RandomlyPlace(f64width, f64height),
+			NewCreature( fmt.Sprintf("c%d", 7) ).Randomize().RandomlyPlace(f64width, f64height),
+			NewCreature( fmt.Sprintf("c%d", 8) ).Randomize().RandomlyPlace(f64width, f64height),
+			NewCreature( fmt.Sprintf("c%d", 9) ).Randomize().RandomlyPlace(f64width, f64height),
+			NewCreature( fmt.Sprintf("c%d", 10) ).Randomize().RandomlyPlace(f64width, f64height),
 		}
 
 
@@ -136,17 +142,17 @@ func run (WIDTH, HEIGHT int) {
 								Σm := mi + mii // The total mass of the 2 creatures.
 								Δm := mi - mii // The difference between the mass of the 2 creatures.
 
-								newDx1 := (creatures[i].dx  * Δm  + (2 * mii * creatures[ii].dx)) / Σm;
-								newDy1 := (creatures[i].dy  * Δm  + (2 * mii * creatures[ii].dy)) / Σm;
-								newDx2 := (creatures[ii].dx * -Δm + (2 * mi  * creatures[i].dx))  / Σm;
-								newDy2 := (creatures[ii].dy * -Δm + (2 * mi  * creatures[i].dy))  / Σm;
+								newDx1 :=  (creatures[i].Dx() * Δm  + (2 * mii * creatures[ii].Dx())) / Σm;
+								newDy1 :=  (creatures[i].Dy() * Δm  + (2 * mii * creatures[ii].Dy())) / Σm;
+								newDx2 := (creatures[ii].Dx() * -Δm + (2 * mi  *  creatures[i].Dx())) / Σm;
+								newDy2 := (creatures[ii].Dy() * -Δm + (2 * mi  *  creatures[i].Dy())) / Σm;
 
 
 							// Update the new velocity's for each creature (that resulted from the collision).
-								creatures[i].dx = newDx1;
-								creatures[i].dy = newDy1;
-								creatures[ii].dx = newDx2;
-								creatures[ii].dy = newDy2;
+								creatures[i].SetDx(newDx1);
+								creatures[i].SetDy(newDy1);
+								creatures[ii].SetDx(newDx2);
+								creatures[ii].SetDy(newDy2);
 						}
 
 					}

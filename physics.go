@@ -5,11 +5,11 @@ package main
 func collision(a,b *Creature) bool {
 
 	// Calculate the square of the change in x.
-		Δx  := b.x - a.x
+		Δx  := b.X() - a.X()
 		Δx2 := Δx*Δx
 
 	// Calculate the square of the change in y.
-		Δy  := b.y - a.y
+		Δy  := b.Y() - a.Y()
 		Δy2 := Δy*Δy
 
 	// Calculate the distance squared.
@@ -17,7 +17,7 @@ func collision(a,b *Creature) bool {
 
 	// Calculate the threshold.
 	// The threshold is the largest distance squared can be to be a collision.
-		threshold2 := b.r + a.r
+		threshold2 := b.R() + a.R()
 		threshold2 *= threshold2
 
 
