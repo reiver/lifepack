@@ -127,6 +127,8 @@ func run (WIDTH, HEIGHT int) {
 
 //@TODO: Make each of the creatures involved in the collision sense the collision.
 
+
+//@TODO: Collision needs to take into account that the 2D spaces loops back on itself.
 							// Calculate the new velocities for each creature (that resulted from the collsion).
 								mi  := creatures[i].Mass()  // The mass of the 1st creature
 								mii := creatures[ii].Mass() // The mass of the 2nd creature.
