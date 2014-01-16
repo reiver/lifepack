@@ -37,6 +37,24 @@ func (me *Creature) GlDraw() {
 		gl.Color3d(0, 0, 0)
 		drawCircle(xx, yy, rr)
 
+	// Draw creature's thrusters.
+		rr = float64(0.25) * me.r
+
+//@TODO: Should speed this up by pre-computing all these cos() and sin() calculations and storing in a lookup table.
+		xx = me.x + ((float64(0.6) * me.r) * math.Cos(me.θ - 2.4))
+		yy = me.y + ((float64(0.6) * me.r) * math.Sin(me.θ - 2.4))
+
+		gl.Color3d(0, 0, 0)
+		drawCircle(xx, yy, rr)
+
+//@TODO: Should speed this up by pre-computing all these cos() and sin() calculations and storing in a lookup table.
+		xx = me.x + ((float64(0.6) * me.r) * math.Cos(me.θ + 2.4))
+		yy = me.y + ((float64(0.6) * me.r) * math.Sin(me.θ + 2.4))
+
+		gl.Color3d(0, 0, 0)
+		drawCircle(xx, yy, rr)
+
+
 	// Draw the creature's name.
 		xx = me.x - me.r - 10
 		yy = me.y - me.r - 10
