@@ -116,6 +116,10 @@ func drawRune(x,y, length float64, r rune) {
 			mapp = &font9
 
 
+		case 'θ', 'Θ', 'ϑ':
+			mapp = &fontθ
+
+
 		default:
 			mapp = &fontSpace
 	}
