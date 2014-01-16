@@ -4,6 +4,7 @@ package main
 
 import "fmt"
 import "github.com/banthar/gl"
+import "math"
 
 
 
@@ -16,18 +17,22 @@ func (me *Creature) GlDraw() {
 		drawCircle(me.x, me.y, me.r)
 
 	// Draw circles for the creature's eyes.
+	// (This is so we can tell what direction the creature is facing.)
 	//
 	// We'll make the eye size 7% of the total radius.
 	// We'll also put the eyes
 		rr := float64(0.07) * me.r
 
-		xx := me.x - float64(4)*rr
-		yy := me.y - (float64(0.8) * me.r)
+//@TODO: Should speed this up by pre-computing all these cos() and sin() calculations and storing in a lookup table.
+		xx := me.x + ((float64(0.8) * me.r) * math.Cos(me.θ - 0.4))
+		yy := me.y + ((float64(0.8) * me.r) * math.Sin(me.θ - 0.4))
 
 		gl.Color3d(0, 0, 0)
 		drawCircle(xx, yy, rr)
 
-		xx = me.x + float64(4)*rr
+//@TODO: Should speed this up by pre-computing all these cos() and sin() calculations and storing in a lookup table.
+		xx = me.x + ((float64(0.8) * me.r) * math.Cos(me.θ + 0.4))
+		yy = me.y + ((float64(0.8) * me.r) * math.Sin(me.θ + 0.4))
 
 		gl.Color3d(0, 0, 0)
 		drawCircle(xx, yy, rr)
@@ -80,6 +85,15 @@ func (me *Creature) GlDraw() {
 		yy = me.y - me.r + 75
 
 		s = fmt.Sprintf("dy: %v", me.dy)
+
+		drawString(xx,yy, s)
+
+
+	// Draw the creature's orientation.
+		xx = me.x + me.r
+		yy = me.y - me.r + 90
+
+		s = fmt.Sprintf("θ: %v degrees", me.θ/(2*math.Pi))
 
 		drawString(xx,yy, s)
 }

@@ -11,6 +11,7 @@ type Creature struct {
 
 	x,y   float64           // Where the creature is.
 	dx,dy float64           // The velocity of the creature.
+	θ     float64           // The angle the creature is facing. (In radians.)
 
 	e     float64           // The energy.
 
@@ -118,6 +119,11 @@ func (me *Creature) RandomlyPlace(width, height float64) (*Creature) {
 
 	me.dx = rand.Float64()*2 - 1
 	me.dy = rand.Float64()*2 - 1
+
+	me.θ  = rand.Float64()*2*math.Pi
+	if 2*math.Pi == me.θ {
+		me.θ = 0
+	}
 
 	me.red   = 0.5 + rand.Float64()*0.5
 	me.green = 0.5 + rand.Float64()*0.5
