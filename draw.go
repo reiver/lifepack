@@ -3,8 +3,42 @@ package main
 
 
 import "github.com/banthar/gl"
+import "math"
 
 
+
+func drawCircle(x, y, r  float64) {
+
+//@TODO: Should speed this up by pre-computing all these cos() and sin() calculations and storing in a lookup table.
+	gl.Begin(gl.TRIANGLE_FAN)
+//		gl.Color3d(me.red, me.green, me.blue)
+
+		gl.Vertex2d(x, y)
+
+		pi2 := 2*math.Pi
+
+		num := 36
+		dTheta := pi2 / float64(num)
+		theta := float64(0)
+		for i:=0 ; i<num ; i++ {
+
+			theta += dTheta
+
+			dx := math.Cos(theta) * r
+			dy := math.Sin(theta) * r
+
+			gl.Vertex2d(x + dx, y + dy)
+		}
+
+		theta += dTheta
+
+		dx := math.Cos(theta) * r
+		dy := math.Sin(theta) * r
+
+		gl.Vertex2d(x + dx, y + dy)
+
+	gl.End()
+}
 
 func drawSquare(x, y, length float64) {
 

@@ -4,7 +4,6 @@ package main
 
 import "fmt"
 import "github.com/banthar/gl"
-import "math"
 
 
 
@@ -12,41 +11,30 @@ import "math"
 func (me *Creature) GlDraw() {
 
 
-	// Draw circle.
-//@TODO: Should speed this up by pre-computing all these cos() and sin() calculations and storing in a lookup table.
-		gl.Begin(gl.TRIANGLE_FAN)
-			gl.Color3d(me.red, me.green, me.blue)
+	// Draw the creature's body, which is just a circle.
+		gl.Color3d(me.red, me.green, me.blue)
+		drawCircle(me.x, me.y, me.r)
 
-			gl.Vertex2d(me.x, me.y)
+	// Draw circles for the creature's eyes.
+	//
+	// We'll make the eye size 7% of the total radius.
+	// We'll also put the eyes
+		rr := float64(0.07) * me.r
 
-			pi2 := 2*math.Pi
+		xx := me.x - float64(4)*rr
+		yy := me.y - (float64(0.8) * me.r)
 
-			num := 36
-			dTheta := pi2 / float64(num)
-			theta := float64(0)
-			for i:=0 ; i<num ; i++ {
+		gl.Color3d(0, 0, 0)
+		drawCircle(xx, yy, rr)
 
-				theta += dTheta
+		xx = me.x + float64(4)*rr
 
-				dx := math.Cos(theta) * me.r
-				dy := math.Sin(theta) * me.r
-
-				gl.Vertex2d(me.x + dx, me.y + dy)
-			}
-
-			theta += dTheta
-
-			dx := math.Cos(theta) * me.r
-			dy := math.Sin(theta) * me.r
-
-			gl.Vertex2d(me.x + dx, me.y + dy)
-
-		gl.End()
-
+		gl.Color3d(0, 0, 0)
+		drawCircle(xx, yy, rr)
 
 	// Draw the creature's name.
-		xx := me.x - me.r - 10
-		yy := me.y - me.r - 10
+		xx = me.x - me.r - 10
+		yy = me.y - me.r - 10
 
 		drawString(xx,yy, me.name)
 
@@ -56,6 +44,42 @@ func (me *Creature) GlDraw() {
 		yy = me.y - me.r - 10
 
 		s := fmt.Sprintf("energy: %v", me.e)
+
+		drawString(xx,yy, s)
+
+
+	// Draw the creature's x position.
+		xx = me.x + me.r
+		yy = me.y - me.r + 30
+
+		s = fmt.Sprintf("x: %v", me.x)
+
+		drawString(xx,yy, s)
+
+
+	// Draw the creature's y position.
+		xx = me.x + me.r
+		yy = me.y - me.r + 45
+
+		s = fmt.Sprintf("y: %v", me.y)
+
+		drawString(xx,yy, s)
+
+
+	// Draw the creature's x speed.
+		xx = me.x + me.r
+		yy = me.y - me.r + 60
+
+		s = fmt.Sprintf("dx: %v", me.dx)
+
+		drawString(xx,yy, s)
+
+
+	// Draw the creature's y speed.
+		xx = me.x + me.r
+		yy = me.y - me.r + 75
+
+		s = fmt.Sprintf("dy: %v", me.dy)
 
 		drawString(xx,yy, s)
 }
