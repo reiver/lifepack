@@ -70,3 +70,12 @@ func draw6x8(x,y, length float64, mapp *[48]rune) {
 
 	}
 }
+
+
+func drawLine(x1,y1, x2, y2 float64) {
+
+	gl.Begin(gl.LINES)
+		gl.Vertex2d(x1, y1)
+		gl.Vertex2d(x2, y2)
+	gl.End()
+}

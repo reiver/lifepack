@@ -114,8 +114,40 @@ func run (WIDTH, HEIGHT int) {
 		for i:=0 ; true ; i++ {
 
 			// Logic.
+				// Update state of each creature that results from the passage of time.
 				for _,creature := range creatures {
 					creature.Next(f64width, f64height)
+				}
+
+				// Deal with any potential collisions between creatures.
+				for i:=0; i<len(creatures); i++ {
+					for ii:=1+i; ii<len(creatures); ii++ {
+
+						if collision(creatures[i], creatures[ii]) {
+
+//@TODO: Make each of the creatures involved in the collision sense the collision.
+
+							// Calculate the new velocities for each creature (that resulted from the collsion).
+								mi  := creatures[i].Mass()  // The mass of the 1st creature
+								mii := creatures[ii].Mass() // The mass of the 2nd creature.
+
+								Σm := mi + mii // The total mass of the 2 creatures.
+								Δm := mi - mii // The difference between the mass of the 2 creatures.
+
+								newDx1 := (creatures[i].dx  * Δm  + (2 * mii * creatures[ii].dx)) / Σm;
+								newDy1 := (creatures[i].dy  * Δm  + (2 * mii * creatures[ii].dy)) / Σm;
+								newDx2 := (creatures[ii].dx * -Δm + (2 * mi  * creatures[i].dx))  / Σm;
+								newDy2 := (creatures[ii].dy * -Δm + (2 * mi  * creatures[i].dy))  / Σm;
+
+
+							// Update the new velocity's for each creature (that resulted from the collision).
+								creatures[i].dx = newDx1;
+								creatures[i].dy = newDy1;
+								creatures[ii].dx = newDx2;
+								creatures[ii].dy = newDy2;
+						}
+
+					}
 				}
 
 
