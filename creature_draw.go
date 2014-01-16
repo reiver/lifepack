@@ -93,7 +93,7 @@ func (me *Creature) GlDraw() {
 		xx = me.x + me.r
 		yy = me.y - me.r + 90
 
-		s = fmt.Sprintf("θ: %v degrees", me.θ/(2*math.Pi))
+		s = fmt.Sprintf("θ: %v degrees", 360*me.θ/(2*math.Pi))
 
 		drawString(xx,yy, s)
 }
